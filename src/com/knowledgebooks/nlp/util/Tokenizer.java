@@ -5,8 +5,11 @@
 
 package com.knowledgebooks.nlp.util;
 
-import java.util.*;
-import java.io.*;
+import java.io.StreamTokenizer;
+import java.io.StringReader;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
@@ -20,21 +23,14 @@ public class Tokenizer {
      * @param s2 string containing words to tokenize
      * @return a List<String> of parsed tokens
      */
-    static public List<String> wordsToList(String s2) {
-        return wordsToList(s2, s2.length() + 1);
+    public static List<String> wordsToList(String str) {
+        return wordsToStream(str).collect(Collectors.toList());
     }
 
-    /**
-     * utility to tokenize an input string into an Array of Strings - with a maximum # of returned words
-     * @param s2 string containing words to tokenize
-     * @param maxR maximum number of tokens to return
-     * @return a List<String> of parsed tokens
-     */
-    static public List<String> wordsToList(String s2, int maxR) {
-        s2 = stripControlCharacters(s2);
-        List<String> words = new ArrayList<String>();
+    public static Stream<String> wordsToStream(String str) {
+        String s2 = stripControlCharacters(str);
+        Stream.Builder<String> sb = Stream.builder();
         String x;
-        int count = 0;
         try {
             StreamTokenizer str_tok = new StreamTokenizer(new StringReader(s2));
             str_tok.whitespaceChars('"', '"');
@@ -65,36 +61,39 @@ public class Tokenizer {
                     // first check for abreviations like "N.J.":
                     int index = s.indexOf(".");
                     if (index < (s.length() - 1)) {
-                        words.add(s);
+                        sb.accept(s);
                     } else {
-                        words.add(s.substring(0, s.length() - 1));
-                        words.add(".");
+                        sb.accept(s.substring(0, s.length() - 1));
+                        sb.accept(".");
                     }
                 } else if (s.endsWith(",")) {
                     x = s.substring(0, s.length() - 1);
-                    if (x.length() > 0) words.add(x);
-                    words.add(",");
+                    if (x.length() > 0)
+                        sb.accept(x);
+                    sb.accept(",");
                 } else if (s.endsWith(";")) {
                     x = s.substring(0, s.length() - 1);
-                    if (x.length() > 0) words.add(x);
-                    words.add(";");
+                    if (x.length() > 0)
+                        sb.accept(x);
+                    sb.accept(";");
                 } else if (s.endsWith("?")) {
                     x = s.substring(0, s.length() - 1);
-                    if (x.length() > 0) words.add(x);
-                    words.add("?");
+                    if (x.length() > 0)
+                        sb.accept(x);
+                    sb.accept("?");
                 } else if (s.endsWith(":")) {
                     x = s.substring(0, s.length() - 1);
-                    if (x.length() > 0) words.add(x);
-                    words.add(":");
+                    if (x.length() > 0)
+                        sb.accept(x);
+                    sb.accept(":");
                 } else {
-                    words.add(s);
+                    sb.accept(s);
                 }
-                if (++count >= maxR) break;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return words;
+        return sb.build();
     }
 
     static private String stripControlCharacters(String s) {

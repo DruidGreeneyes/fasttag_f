@@ -1,5 +1,7 @@
-fasttag_v2
+fasttag_f 
 ==========
+
+Forked from: https://github.com/mark-watson/fasttag_v2 on Sept. 17 2016, so that I could add functional wizardry.
 
 Mark Watson  http://markwatson.com
 
