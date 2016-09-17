@@ -141,6 +141,17 @@ public class FastTag {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Same as tag for List[String]s, but only operates on a single word, so
+     * that you can map it across a string[] or something if you want. MAKE SURE
+     * THIS RUNS SEQUENTIALLY, as it needs to preserve some information about
+     * its current context in the sentence, and that breaks if it runs in
+     * parallel.
+     * 
+     * @param lexicon
+     * @param word
+     * @return the word, tagged: word/tag
+     */
     public static String tag(Map<String, String[]> lexicon, String word) {
         UnaryOperator<Pair<String, String>> rule_1 = rule_1();
         UnaryOperator<Pair<String, String>> rule_6 = rule_6();
