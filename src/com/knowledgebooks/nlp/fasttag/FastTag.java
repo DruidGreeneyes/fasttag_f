@@ -141,6 +141,22 @@ public class FastTag {
                 .collect(Collectors.toList());
     }
 
+    public static String tag(Map<String, String[]> lexicon, String word) {
+        UnaryOperator<Pair<String, String>> rule_1 = rule_1();
+        UnaryOperator<Pair<String, String>> rule_6 = rule_6();
+        Pair<String, String> p = rule_0
+                .apply(Pair.make(word, getWordFromLexicon(lexicon, word)));
+        p = rule_1.apply(p);
+        p = rule_2.apply(p);
+        p = rule_3.apply(p);
+        p = rule_4.apply(p);
+        p = rule_5.apply(p);
+        p = rule_6.apply(p);
+        p = rule_7.apply(p);
+        p = rule_8.apply(p);
+        return p.intoFun((a, b) -> a + "/" + b);
+    }
+
     /*********************************
      * Old Code from here on out.
      ********************************/
