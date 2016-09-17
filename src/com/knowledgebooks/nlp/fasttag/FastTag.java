@@ -260,13 +260,13 @@ public class FastTag {
 				System.out.println(words.get(i) + "/" + tags.get(i));
 	}
 
-	private static Map<String, String[]> buildLexicon() {
+    public static Map<String, String[]> buildLexicon() {
+        return buildLexicon("lexicon.txt");
+    }
+
+    public static Map<String, String[]> buildLexicon(String path) {
 		Map<String, String[]> lexicon = new HashMap<String, String[]>();
-		try {
-			InputStream ins = FastTag.class.getClassLoader().getResourceAsStream("lexicon.txt");
-			if (ins == null) {
-				ins = new FileInputStream("data/lexicon.txt");
-			}
+        try (InputStream ins = new FileInputStream(path)) {
 			Scanner scanner = new Scanner(ins);
 			scanner.useDelimiter(System.getProperty("line.separator"));
 			while (scanner.hasNext()) {
