@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  * Copyright 2007 by Mark Watson. All rights reserved.
  * <p/>
  */
-public class Tokenizer {
+public final class Tokenizer {
     /**
      * utility to tokenize an input string into an Array of Strings
      * @param s2 string containing words to tokenize

@@ -27,7 +27,7 @@ import pair.Pair;
  * Copyright 2002-2007 by Mark Watson. All rights reserved.
  * <p/>
  */
-public class FastTag {
+public final class FastTag {
 
 	private static final Map<String, String[]> lexicon = buildLexicon();
 
