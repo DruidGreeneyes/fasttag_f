@@ -168,6 +168,10 @@ public class FastTag {
         return p.intoFun((a, b) -> a + "/" + b);
     }
 
+    public static UnaryOperator<String> tag(Map<String, String[]> lexicon) {
+        return w -> tag(lexicon, w);
+    }
+
     /*********************************
      * Old Code from here on out.
      ********************************/
