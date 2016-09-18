@@ -19,8 +19,8 @@ import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 import com.knowledgebooks.nlp.util.POS;
-import com.knowledgebooks.nlp.util.Util;
 import com.knowledgebooks.nlp.util.Tokenizer;
+import com.knowledgebooks.nlp.util.Util;
 
 import pair.Pair;
 
@@ -168,6 +168,7 @@ public final class FastTag {
         p = rule_6.apply(p);
         p = rule_7.apply(p);
         p = rule_8.apply(p);
+        p = p.mapRight(s -> POS.fromString(s).toString());
         return p.intoFun((a, b) -> a + "/" + b);
     }
 
