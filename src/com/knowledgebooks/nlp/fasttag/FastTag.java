@@ -18,6 +18,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
+import com.knowledgebooks.nlp.util.POS;
 import com.knowledgebooks.nlp.util.Util;
 
 import pair.Pair;
@@ -137,6 +138,7 @@ public class FastTag {
                 .map(w -> Pair.make(w, getWordFromLexicon(lexicon, w)))
                 .map(rule_0).map(rule_1()).map(rule_2).map(rule_3).map(rule_4)
                 .map(rule_5).map(rule_6()).map(rule_7).map(rule_8)
+                .map(Pair.F.mapRight(s -> POS.fromString(s).toString()))
                 .map(Pair.F.intoFun((a, b) -> a + "/" + b))
                 .collect(Collectors.toList());
     }
