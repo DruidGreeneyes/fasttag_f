@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 import com.knowledgebooks.nlp.util.POS;
 import com.knowledgebooks.nlp.util.Util;
+import com.knowledgebooks.nlp.util.Tokenizer;
 
 import pair.Pair;
 
@@ -28,7 +29,7 @@ import pair.Pair;
  * Copyright 2002-2007 by Mark Watson. All rights reserved.
  * <p/>
  */
-public class FastTag {
+public final class FastTag {
 
 	private static final Map<String, String[]> lexicon = buildLexicon();
 
@@ -259,7 +260,7 @@ public class FastTag {
         } else
             text = args[0];
 
-        List<String> words = com.knowledgebooks.nlp.util.Tokenizer
+        List<String> words = Tokenizer
                 .wordsToList(text);
         List<String> tags = _tag(lexicon, words);
 			for (int i = 0; i < words.size(); i++)

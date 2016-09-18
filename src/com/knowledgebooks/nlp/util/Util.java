@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
 public final class Util {
+	private Util(){}
     public static <T> UnaryOperator<T> onlyIf(Predicate<T> pred,
             UnaryOperator<T> fun) {
         return arg -> (pred.test(arg)) ? fun.apply(arg) : arg;
