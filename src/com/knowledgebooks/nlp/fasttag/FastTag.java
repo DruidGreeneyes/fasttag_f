@@ -137,7 +137,7 @@ public class FastTag {
                 .map(w -> Pair.make(w, getWordFromLexicon(lexicon, w)))
                 .map(rule_0).map(rule_1()).map(rule_2).map(rule_3).map(rule_4)
                 .map(rule_5).map(rule_6()).map(rule_7).map(rule_8)
-                .map(Pair.F.into((a, b) -> a + "/" + b))
+                .map(Pair.F.intoFun((a, b) -> a + "/" + b))
                 .collect(Collectors.toList());
     }
 
