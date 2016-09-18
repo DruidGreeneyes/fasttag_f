@@ -3,7 +3,7 @@
 // For an alternative non-GPL license: contact the author
 // THIS SOFTWARE COMES WITH NO WARRANTY
 
-package com.knowledgebooks.nlp.fasttag;
+package com.ooba.nlp.fasttag;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -18,7 +18,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-import com.knowledgebooks.nlp.util.Util;
+import com.ooba.nlp.util.Util;
 
 import pair.Pair;
 
@@ -257,7 +257,7 @@ public final class FastTag {
         } else
             text = args[0];
 
-        List<String> words = com.knowledgebooks.nlp.util.Tokenizer
+        List<String> words = com.ooba.nlp.util.Tokenizer
                 .wordsToList(text);
         List<String> tags = _tag(lexicon, words);
 			for (int i = 0; i < words.size(); i++)

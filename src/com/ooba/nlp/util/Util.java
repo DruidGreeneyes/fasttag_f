@@ -1,4 +1,4 @@
-package com.knowledgebooks.nlp.util;
+package com.ooba.nlp.util;
 
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
