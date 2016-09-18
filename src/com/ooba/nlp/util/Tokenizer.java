@@ -3,7 +3,7 @@
 // For an alternative non-GPL license: contact the author
 // THIS SOFTWARE COMES WITH NO WARRANTY
 
-package com.knowledgebooks.nlp.util;
+package com.ooba.nlp.util;
 
 import java.io.StreamTokenizer;
 import java.io.StringReader;

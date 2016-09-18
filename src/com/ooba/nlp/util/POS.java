@@ -1,11 +1,11 @@
-package com.knowledgebooks.nlp.util;
+package com.ooba.nlp.util;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import com.knowledgebooks.nlp.fasttag.FastTag;
-import com.knowledgebooks.nlp.util.Tokenizer;
+import com.ooba.nlp.fasttag.FastTag;
+import com.ooba.nlp.util.Tokenizer;
 
 public enum POS {
     CC("CC"), CD("CD"), DT("DT"), EX("EX"), FW("FW"), IN("IN"), JJ("JJ"), 

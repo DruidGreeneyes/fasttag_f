@@ -3,7 +3,7 @@
 // For an alternative non-GPL license: contact the author
 // THIS SOFTWARE COMES WITH NO WARRANTY
 
-package com.knowledgebooks.nlp.fasttag;
+package com.ooba.nlp.fasttag;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -18,9 +18,9 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-import com.knowledgebooks.nlp.util.POS;
-import com.knowledgebooks.nlp.util.Tokenizer;
-import com.knowledgebooks.nlp.util.Util;
+import com.ooba.nlp.util.POS;
+import com.ooba.nlp.util.Tokenizer;
+import com.ooba.nlp.util.Util;
 
 import pair.Pair;
 
