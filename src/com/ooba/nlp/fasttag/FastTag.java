@@ -18,7 +18,6 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-import com.ooba.nlp.util.POS;
 import com.ooba.nlp.util.Tokenizer;
 import com.ooba.nlp.util.Util;
 
@@ -139,7 +138,6 @@ public final class FastTag {
                 .map(w -> Pair.make(w, getWordFromLexicon(lexicon, w)))
                 .map(rule_0).map(rule_1()).map(rule_2).map(rule_3).map(rule_4)
                 .map(rule_5).map(rule_6()).map(rule_7).map(rule_8)
-                .map(Pair.F.mapRight(s -> POS.fromString(s).toString()))
                 .map(Pair.F.intoFun((a, b) -> a + "/" + b))
                 .collect(Collectors.toList());
     }
@@ -168,7 +166,6 @@ public final class FastTag {
         p = rule_6.apply(p);
         p = rule_7.apply(p);
         p = rule_8.apply(p);
-        p = p.mapRight(s -> POS.fromString(s).toString());
         return p.intoFun((a, b) -> a + "/" + b);
     }
 

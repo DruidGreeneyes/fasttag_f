@@ -44,16 +44,9 @@ public enum POS {
         return fromTaggedWord(taggedWord).isVerb();
     }
 
-    public static POS fromString(String str) {
-        try {
-            return valueOf(str);
-        } catch (Exception e) {
-            return SYM;
-        }
-    }
-
     public static POS fromTaggedWord(String taggedWord) {
-        return fromString(taggedWord.substring(taggedWord.lastIndexOf(delim)));
+        int i = taggedWord.indexOf(delim);
+        return (i < 0) ? SYM : valueOf(taggedWord.substring(i));
     }
 
     public static List<String> tagText(String text) {
