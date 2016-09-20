@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import com.ooba.nlp.fasttag.FastTag;
-import com.ooba.nlp.util.Tokenizer;
 
 public enum POS {
     CC("CC"), CD("CD"), DT("DT"), EX("EX"), FW("FW"), IN("IN"), JJ("JJ"), 
@@ -54,7 +53,7 @@ public enum POS {
     }
 
     public static POS fromTaggedWord(String taggedWord) {
-        return valueOf(taggedWord.substring(taggedWord.lastIndexOf(delim)));
+        return fromString(taggedWord.substring(taggedWord.lastIndexOf(delim)));
     }
 
     public static List<String> tagText(String text) {
