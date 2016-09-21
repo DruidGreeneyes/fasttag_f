@@ -9,8 +9,8 @@ import com.ooba.nlp.fasttag.FastTag;
 public enum POS {
     CC("CC"), CD("CD"), DT("DT"), EX("EX"), FW("FW"), IN("IN"), JJ("JJ"), 
     JJR("JJR"), JJS("JJS"), LS("LS"), MD("MD"), NN("NN"), NNP("NNP"), 
-    NNPS("NNPS"), NNS("NNS"), PDT("PDT"), POS("POS"), PP("PP"), 
-    PP$("PP$"), RB("RB"), RBR("RBR"), RBS("RBS"), RP("RP"), SYM("SYM"),
+	NNPS("NNPS"), NNS("NNS"), PDT("PDT"), POS("POS"), PP("PP"), PP$("PP$"), 
+	PRP("PRP"), RB("RB"), RBR("RBR"), RBS("RBS"), RP("RP"), SYM("SYM"),
     TO("TO"), UH("UH"), VB("VB"), VBD("VBD"), VBG("VBG"), VBN("VBN"),
     VBP("VBP"), VBZ("VBZ"), WDT("WDT"), WP("WP"), WP$("WP$"), WRB("WRB"),
     DOLLAR_SIGN("$"), HASH_SIGN("#"), QUOTE("\""), OPEN_PAREN("("),
