@@ -46,7 +46,7 @@ public enum POS {
 
     public static POS fromTaggedWord(String taggedWord) {
         int i = taggedWord.indexOf(delim);
-        return (i < 0) ? SYM : valueOf(taggedWord.substring(i));
+		return (i < 0) ? SYM : valueOf(taggedWord.substring(i + 1));
     }
 
     public static List<String> tagText(String text) {
