@@ -6,7 +6,9 @@
 package com.ooba.nlp.fasttag;
 
 import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -173,10 +175,30 @@ public final class FastTag {
         return w -> tag(lexicon, w);
     }
 
+	public static Map<String, String[]> buildLexicon() {
+		return buildLexicon("lexicon.txt");
+	}
+
+	public static Pair<String, String[]> getTagsFromLine(String line) {
+		String[] bits = line.split(" ");
+		return Pair.make(bits[0], Util.subarray(bits, 1));
+	}
+
+	public static Map<String, String[]> buildLexicon(String path) {
+		Map<String, String[]> lexicon = new HashMap<String, String[]>();
+		try {
+			Files.lines(Paths.get(path)).filter(s -> s.contains(" ")).map(FastTag::getTagsFromLine)
+					.forEach(Pair.F.intoCon(lexicon::put));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return lexicon;
+	}
+
     /*********************************
      * Old Code from here on out.
      ********************************/
-
+	@Deprecated
     public static List<String> _tag(Map<String, String[]> lexicon,
             List<String> words) {
         // Stream<String> res = words.stream().sequential().map(w ->
@@ -265,15 +287,11 @@ public final class FastTag {
 				System.out.println(words.get(i) + "/" + tags.get(i));
 	}
 
-    public static Map<String, String[]> buildLexicon() {
-        return buildLexicon("lexicon.txt");
-    }
-
-    public static Map<String, String[]> buildLexicon(String path) {
+	@Deprecated
+	public static Map<String, String[]> _buildLexicon(String path) {
 		Map<String, String[]> lexicon = new HashMap<String, String[]>();
-        try (InputStream ins = new FileInputStream(path)) {
-			Scanner scanner = new Scanner(ins);
-			scanner.useDelimiter(System.getProperty("line.separator"));
+		try (Scanner scanner = new Scanner(new FileInputStream(path))
+				.useDelimiter(System.getProperty("line.separator"))) {
 			while (scanner.hasNext()) {
 				String line = scanner.next();
 				int count = 0;
@@ -285,18 +303,16 @@ public final class FastTag {
 				if (count == 0) {
 					continue;
 				}
-				String[] ss = new String[count];
-				Scanner lineScanner = new Scanner(line);
-				lineScanner.useDelimiter(" ");
-				String word = lineScanner.next();
-				count = 0;
-				while (lineScanner.hasNext()) {
-					ss[count++] = lineScanner.next();
+				try (Scanner lineScanner = new Scanner(line).useDelimiter(" ")) {
+					String[] ss = new String[count];
+					String word = lineScanner.next();
+					count = 0;
+					while (lineScanner.hasNext()) {
+						ss[count++] = lineScanner.next();
+					}
+					lexicon.put(word, ss);
 				}
-				lineScanner.close();
-				lexicon.put(word, ss);
 			}
-			scanner.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
