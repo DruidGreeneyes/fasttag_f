@@ -2,6 +2,7 @@ package com.ooba.nlp.util;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import com.ooba.nlp.fasttag.FastTag;
@@ -17,6 +18,8 @@ public enum POS {
     CLOSE_PAREN(")"), COMMA(","), PERIOD("."), COLON(":");
 
     private static String delim = "/";
+
+	private static Pattern alpha = Pattern.compile("[A-Z]");
 
     private String str;
 
@@ -40,13 +43,26 @@ public enum POS {
         return str.startsWith("V");
     }
 
+	public static POS fromString(String str) {
+		POS res;
+		try {
+			res = valueOf(str);
+		} catch (IllegalArgumentException e) {
+			if (alpha.matcher(str).find())
+				throw e;
+			else
+				res = SYM;
+		}
+		return res;
+	}
+
     public static boolean isVerb(String taggedWord) {
         return fromTaggedWord(taggedWord).isVerb();
     }
 
     public static POS fromTaggedWord(String taggedWord) {
         int i = taggedWord.indexOf(delim);
-		return (i < 0) ? SYM : valueOf(taggedWord.substring(i + 1));
+		return (i < 0) ? SYM : fromString(taggedWord.substring(i + 1));
     }
 
     public static List<String> tagText(String text) {
